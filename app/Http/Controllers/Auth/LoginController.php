@@ -17,6 +17,9 @@ class LoginController extends Controller
      */
     public function index()
     {
+        if(Auth::check()){
+            return redirect('/');
+        }
         return view('auth.login');
     }
 
@@ -42,6 +45,9 @@ class LoginController extends Controller
 
     public function register()
     {
+        if(Auth::check()){
+            return redirect('/');
+        }
         return view('auth.register');
     }
 
@@ -68,6 +74,7 @@ class LoginController extends Controller
     {
         if(Auth::check()){
             Auth::logout();
+            $request->session()->invalidate();
         }
         return redirect('/');
     }
